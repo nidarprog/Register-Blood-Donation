@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:64307/api/";
+const baseUrl = "http://localhost:64307/api/";
 
 export default {
-  dCandidate(url = baseURL + "dcandidate/") {
+  dCandidate(url = baseUrl + "dcandidate/") {
     return {
       fetchAll: () => axios.get(url),
       fetchById: (id) => axios.get(url + id),

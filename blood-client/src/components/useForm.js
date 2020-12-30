@@ -11,7 +11,7 @@ const useForm = (initialFieldValues, validate, setCurrentId) => {
       ...values,
       ...fieldValue,
     });
-    // validate(fieldValue);
+    validate(fieldValue);
   };
 
   const resetForm = () => {

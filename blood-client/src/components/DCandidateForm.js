@@ -1,25 +1,37 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   TextField,
+  withStyles,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
   Button,
+  FormHelperText,
 } from "@material-ui/core";
-import { useToasts } from "react-toast-notifications";
-import { makeStyles } from "@material-ui/core/styles";
 import useForm from "./useForm";
+import { connect } from "react-redux";
+import * as actions from "../actions/dCandidate";
+import { useToasts } from "react-toast-notifications";
 
-const useStyles = (theme) => ({
-  textFieldSpacing: {
-    marginTop: 5,
-    marginBottom: 5,
+const styles = (theme) => ({
+  root: {
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+      minWidth: 230,
+    },
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 230,
+  },
+  smMargin: {
+    margin: theme.spacing(1),
   },
 });
 
-const initalFieldValues = {
+const initialFieldValues = {
   fullName: "",
   mobile: "",
   email: "",
@@ -28,14 +40,30 @@ const initalFieldValues = {
   address: "",
 };
 
-export default function DCandidateForm({ ...props }) {
-  const classes = useStyles();
-  const inputLabel = React.useRef(null);
-  const [labelWidth, setLabelWidth] = React.useState(0);
+const DCandidateForm = ({ classes, ...props }) => {
+  //toast msg.
+  const { addToast } = useToasts();
 
-  React.useEffect(() => {
-    setLabelWidth(inputLabel.current.offsetWidth);
-  }, []);
+  //validate()
+  //validate({fullName:'jenny'})
+  const validate = (fieldValues = values) => {
+    let temp = { ...errors };
+    if ("fullName" in fieldValues)
+      temp.fullName = fieldValues.fullName ? "" : "This field is required.";
+    if ("mobile" in fieldValues)
+      temp.mobile = fieldValues.mobile ? "" : "This field is required.";
+    if ("bloodGroup" in fieldValues)
+      temp.bloodGroup = fieldValues.bloodGroup ? "" : "This field is required.";
+    if ("email" in fieldValues)
+      temp.email = /^$|.+@.+..+/.test(fieldValues.email)
+        ? ""
+        : "Email is not valid.";
+    setErrors({
+      ...temp,
+    });
+
+    if (fieldValues == values) return Object.values(temp).every((x) => x == "");
+  };
 
   const {
     values,
@@ -44,48 +72,48 @@ export default function DCandidateForm({ ...props }) {
     setErrors,
     handleInputChange,
     resetForm,
-  } = useForm(initalFieldValues, props.setCurrentId);
+  } = useForm(initialFieldValues, validate, props.setCurrentId);
 
-  const validate = () => {
-    let temp = [];
-    temp.fullName = values.fullName ? "" : "This field is required";
-    temp.mobile = values.mobile ? "" : "This field is required";
-    temp.bloodGroup = values.bloodGroup ? "" : "This field is required";
-    temp.email = /^$|.+@.+..+/.test(values.email) ? "" : "Email is not valid.";
-    setErrors({
-      ...temp,
-    });
-    return Object.values(temp).every((x) => x === "");
-  };
+  //material-ui select
+  const inputLabel = React.useRef(null);
+  const [labelWidth, setLabelWidth] = React.useState(0);
+  React.useEffect(() => {
+    setLabelWidth(inputLabel.current.offsetWidth);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      window.alert("validation succeeded");
+      const onSuccess = () => {
+        resetForm();
+        addToast("Submitted successfully", { appearance: "success" });
+      };
+      if (props.currentId == 0) props.createDCandidate(values, onSuccess);
+      else props.updateDCandidate(props.currentId, values, onSuccess);
     }
   };
 
-  // useEffect(() => {
-  //   if (props.currentId !== 0) {
-  //     setValues({
-  //       ...props.dCandidateList.find((x) => x.id === props.currentId),
-  //     });
-  //     setErrors({});
-  //   }
-  // }, [props.currentId]);
+  useEffect(() => {
+    if (props.currentId != 0) {
+      setValues({
+        ...props.dCandidateList.find((x) => x.id == props.currentId),
+      });
+      setErrors({});
+    }
+  }, [props.currentId]);
 
   return (
     <form
       autoComplete='off'
       noValidate
+      className={classes.root}
       onSubmit={handleSubmit}
-      style={{ marginTop: 10 }}
     >
       <Grid container>
         <Grid item xs={6}>
           <TextField
             name='fullName'
-            variant='filled'
+            variant='outlined'
             label='Full Name'
             value={values.fullName}
             onChange={handleInputChange}
@@ -96,14 +124,14 @@ export default function DCandidateForm({ ...props }) {
           />
           <TextField
             name='email'
-            variant='filled'
+            variant='outlined'
             label='Email'
             value={values.email}
             onChange={handleInputChange}
             {...(errors.email && { error: true, helperText: errors.email })}
           />
           <FormControl
-            variant='filled'
+            variant='outlined'
             className={classes.formControl}
             {...(errors.bloodGroup && { error: true })}
           >
@@ -124,15 +152,15 @@ export default function DCandidateForm({ ...props }) {
               <MenuItem value='O+'>O +ve</MenuItem>
               <MenuItem value='O-'>O -ve</MenuItem>
             </Select>
-            {/* {errors.bloodGroup && (
+            {errors.bloodGroup && (
               <FormHelperText>{errors.bloodGroup}</FormHelperText>
-            )} */}
+            )}
           </FormControl>
         </Grid>
         <Grid item xs={6}>
           <TextField
             name='mobile'
-            variant='filled'
+            variant='outlined'
             label='Mobile'
             value={values.mobile}
             onChange={handleInputChange}
@@ -140,14 +168,14 @@ export default function DCandidateForm({ ...props }) {
           />
           <TextField
             name='age'
-            variant='filled'
+            variant='outlined'
             label='Age'
             value={values.age}
             onChange={handleInputChange}
           />
           <TextField
             name='address'
-            variant='filled'
+            variant='outlined'
             label='Address'
             value={values.address}
             onChange={handleInputChange}
@@ -173,4 +201,18 @@ export default function DCandidateForm({ ...props }) {
       </Grid>
     </form>
   );
-}
+};
+
+const mapStateToProps = (state) => ({
+  dCandidateList: state.dCandidate.list,
+});
+
+const mapActionToProps = {
+  createDCandidate: actions.create,
+  updateDCandidate: actions.update,
+};
+
+export default connect(
+  mapStateToProps,
+  mapActionToProps
+)(withStyles(styles)(DCandidateForm));
