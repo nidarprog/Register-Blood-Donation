@@ -21,6 +21,8 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useToasts } from "react-toast-notifications";
 import { useTranslation } from "react-i18next";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
 
 const styles = (theme) => ({
   root: {
@@ -31,6 +33,9 @@ const styles = (theme) => ({
   paper: {
     margin: theme.spacing(2),
     padding: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
   },
 });
 
@@ -58,14 +63,38 @@ const DCandidates = ({ classes, ...props }) => {
   };
   return (
     <Paper className={classes.paper} elevation={3}>
-      <Button onClick={changeLanguage("no")}>NO</Button>
-      <Button onClick={changeLanguage("en")}>EN</Button>
-      <Typography
+      <AppBar position='static'>
+        <Toolbar>
+          <Typography variant='h6' className={classes.title}>
+            {t("title")}
+          </Typography>
+
+          <Button
+            onClick={changeLanguage("no")}
+            variant='outlined'
+            color='inherit'
+          >
+            NO
+          </Button>
+          <Button
+            onClick={changeLanguage("en")}
+            variant='outlined'
+            color='inherit'
+          >
+            EN
+          </Button>
+
+          {/* <Typography variant='h6' className={classes.title}> */}
+          {/* <div> {t("title")}</div> */}
+        </Toolbar>
+      </AppBar>
+
+      {/* <Typography
         align='center'
         style={{ color: "white", backgroundColor: "#BD0000", fontSize: 50 }}
       >
         {t("title")}
-      </Typography>
+      </Typography> */}
       <Grid container>
         <Grid item xs={6}>
           <DCandidateForm {...{ currentId, setCurrentId }} />
