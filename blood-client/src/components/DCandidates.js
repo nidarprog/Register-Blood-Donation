@@ -13,6 +13,7 @@ import {
   withStyles,
   ButtonGroup,
   Button,
+  Typography,
 } from "@material-ui/core";
 import DCandidateForm from "./DCandidateForm";
 import EditIcon from "@material-ui/icons/Edit";
@@ -49,11 +50,17 @@ const DCandidates = ({ classes, ...props }) => {
   };
   return (
     <Paper className={classes.paper} elevation={3}>
+      <Typography
+        align='center'
+        style={{ color: "white", backgroundColor: "#FF2424", fontSize: 50 }}
+      >
+        Blood donation register
+      </Typography>
       <Grid container>
         <Grid item xs={6}>
           <DCandidateForm {...{ currentId, setCurrentId }} />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <TableContainer>
             <Table>
               <TableHead className={classes.root}>
@@ -70,7 +77,16 @@ const DCandidates = ({ classes, ...props }) => {
                     <TableRow key={index} hover>
                       <TableCell>{record.fullName}</TableCell>
                       <TableCell>{record.mobile}</TableCell>
-                      <TableCell>{record.bloodGroup}</TableCell>
+                      <TableCell
+                        style={{
+                          fontWeight: "bold",
+                          fontSize: 18,
+                          fontStyle: "oblique",
+                          marginLeft: 250,
+                        }}
+                      >
+                        {record.bloodGroup}
+                      </TableCell>
                       <TableCell>
                         <ButtonGroup variant='text'>
                           <Button>
