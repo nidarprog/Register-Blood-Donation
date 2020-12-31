@@ -1,3 +1,13 @@
 {
-    "FullName": "Full Navn"
+    "fullName": "Full Navn",
+    "email":"Epost",
+    "bloodGroup":"Blod gruppe",
+    "bloodGroupSelect":"Velg blodtype",
+    "mobile":"Mobil",
+    "age":"Alder",
+    "address":"Adresse",    
+    "add": "Legg til",   
+    "name": "Navn", 
+    "title":"Registrering av blod donasjoner"
+
 }

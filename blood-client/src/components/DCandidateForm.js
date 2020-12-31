@@ -118,7 +118,7 @@ const DCandidateForm = ({ classes, ...props }) => {
               name='fullName'
               variant='outlined'
               // label='Full Name'
-              label={t("FullName")}
+              label={t("fullName")}
               value={values.fullName}
               onChange={handleInputChange}
               {...(errors.fullName && {
@@ -130,7 +130,8 @@ const DCandidateForm = ({ classes, ...props }) => {
             <TextField
               name='email'
               variant='outlined'
-              label='Email'
+              // label='Email'
+              label={t("email")}
               value={values.email}
               onChange={handleInputChange}
               {...(errors.email && { error: true, helperText: errors.email })}
@@ -141,14 +142,14 @@ const DCandidateForm = ({ classes, ...props }) => {
               className={classes.formControl}
               {...(errors.bloodGroup && { error: true })}
             >
-              <InputLabel ref={inputLabel}>Blood Group</InputLabel>
+              <InputLabel ref={inputLabel}>{t("bloodGroup")}</InputLabel>
               <Select
                 name='bloodGroup'
                 value={values.bloodGroup}
                 onChange={handleInputChange}
                 labelWidth={labelWidth}
               >
-                <MenuItem value=''>Select Blood Group</MenuItem>
+                <MenuItem value=''>{t("bloodGroupSelect")}</MenuItem>
                 <MenuItem value='A+'>A+ </MenuItem>
                 <MenuItem value='A-'>A- </MenuItem>
                 <MenuItem value='B+'>B+ </MenuItem>
@@ -165,7 +166,8 @@ const DCandidateForm = ({ classes, ...props }) => {
             <TextField
               name='mobile'
               variant='outlined'
-              label='Mobile'
+              // label='Mobile'
+              label={t("mobile")}
               value={values.mobile}
               onChange={handleInputChange}
               {...(errors.mobile && { error: true, helperText: errors.mobile })}
@@ -173,14 +175,16 @@ const DCandidateForm = ({ classes, ...props }) => {
             <TextField
               name='age'
               variant='outlined'
-              label='Age'
+              // label='Age'
+              label={t("age")}
               value={values.age}
               onChange={handleInputChange}
             />
             <TextField
               name='address'
               variant='outlined'
-              label='Address'
+              // label='Address'
+              label={t("address")}
               value={values.address}
               onChange={handleInputChange}
             />
@@ -191,7 +195,8 @@ const DCandidateForm = ({ classes, ...props }) => {
                 type='submit'
                 className={classes.smMargin}
               >
-                Submit
+                {/* Submit */}
+                {t("add")}
               </Button>
               <Button
                 variant='contained'

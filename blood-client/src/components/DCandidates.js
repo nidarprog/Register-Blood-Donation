@@ -20,6 +20,7 @@ import DCandidateForm from "./DCandidateForm";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useToasts } from "react-toast-notifications";
+import { useTranslation } from "react-i18next";
 
 const styles = (theme) => ({
   root: {
@@ -30,12 +31,12 @@ const styles = (theme) => ({
   paper: {
     margin: theme.spacing(2),
     padding: theme.spacing(2),
-    width: theme.spacing(65),
   },
 });
 
 const DCandidates = ({ classes, ...props }) => {
   const [currentId, setCurrentId] = useState(0);
+  const { t } = useTranslation();
 
   const changeLanguage = (ln) => {
     return () => {
@@ -61,9 +62,9 @@ const DCandidates = ({ classes, ...props }) => {
       <Button onClick={changeLanguage("en")}>EN</Button>
       <Typography
         align='center'
-        style={{ color: "white", backgroundColor: "#FF2424", fontSize: 50 }}
+        style={{ color: "white", backgroundColor: "#BD0000", fontSize: 50 }}
       >
-        Blood donation register
+        {t("title")}
       </Typography>
       <Grid container>
         <Grid item xs={6}>
@@ -81,9 +82,9 @@ const DCandidates = ({ classes, ...props }) => {
             <Grid>
               <TableHead className={classes.root}>
                 <TableRow>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Mobile</TableCell>
-                  <TableCell>Blood Group</TableCell>
+                  <TableCell>{t("name")}</TableCell>
+                  <TableCell>{t("mobile")}</TableCell>
+                  <TableCell>{t("bloodGroup")}</TableCell>
                   <TableCell></TableCell>
                 </TableRow>
               </TableHead>

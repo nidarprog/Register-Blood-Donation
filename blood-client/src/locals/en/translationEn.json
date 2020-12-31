@@ -1,3 +1,13 @@
 {
-    "FullName": "Full Name"
+    "fullName": "Full Name",
+    "email":"Email",
+    "bloodGroup":"Blod Group",
+    "bloodGroupSelect":"Select blood type",
+      "mobile":"Mobile",
+    "age":"Age",
+    "address":"Address",    
+    "add": "Add",  
+    "name": "Name",
+    "title":"Blood donation register"
 }
+
