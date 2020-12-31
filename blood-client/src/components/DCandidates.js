@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import i18n from "../i18n";
 import * as actions from "../actions/dCandidate";
 import {
   Grid,
@@ -36,6 +37,12 @@ const styles = (theme) => ({
 const DCandidates = ({ classes, ...props }) => {
   const [currentId, setCurrentId] = useState(0);
 
+  const changeLanguage = (ln) => {
+    return () => {
+      i18n.changeLanguage(ln);
+    };
+  };
+
   useEffect(() => {
     props.fetchAllDCandidates();
   }, []);
@@ -50,6 +57,8 @@ const DCandidates = ({ classes, ...props }) => {
   };
   return (
     <Paper className={classes.paper} elevation={3}>
+      <Button onClick={changeLanguage("no")}>NO</Button>
+      <Button onClick={changeLanguage("en")}>EN</Button>
       <Typography
         align='center'
         style={{ color: "white", backgroundColor: "#FF2424", fontSize: 50 }}
