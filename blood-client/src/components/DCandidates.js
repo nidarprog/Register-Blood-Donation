@@ -30,7 +30,6 @@ const styles = (theme) => ({
     margin: theme.spacing(2),
     padding: theme.spacing(2),
     width: theme.spacing(65),
-    backgroundColor: "#FFF9F9",
   },
 });
 

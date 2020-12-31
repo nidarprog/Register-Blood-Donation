@@ -14,6 +14,7 @@ import useForm from "./useForm";
 import { connect } from "react-redux";
 import * as actions from "../actions/dCandidate";
 import { useToasts } from "react-toast-notifications";
+import { useTranslation } from "react-i18next";
 
 const styles = (theme) => ({
   root: {
@@ -43,6 +44,7 @@ const initialFieldValues = {
 const DCandidateForm = ({ classes, ...props }) => {
   //toast msg.
   const { addToast } = useToasts();
+  const { t } = useTranslation();
 
   //validate()
   //validate({fullName:'jenny'})
@@ -115,7 +117,8 @@ const DCandidateForm = ({ classes, ...props }) => {
             <TextField
               name='fullName'
               variant='outlined'
-              label='Full Name'
+              // label='Full Name'
+              label={t("FullName")}
               value={values.fullName}
               onChange={handleInputChange}
               {...(errors.fullName && {
