@@ -103,103 +103,105 @@ const DCandidateForm = ({ classes, ...props }) => {
   }, [props.currentId]);
 
   return (
-    <form
-      autoComplete='off'
-      noValidate
-      className={classes.root}
-      onSubmit={handleSubmit}
-    >
-      <Grid container>
-        <Grid item xs={6}>
-          <TextField
-            name='fullName'
-            variant='outlined'
-            label='Full Name'
-            value={values.fullName}
-            onChange={handleInputChange}
-            {...(errors.fullName && {
-              error: true,
-              helperText: errors.fullName,
-            })}
-          />
-          <TextField
-            name='email'
-            variant='outlined'
-            label='Email'
-            value={values.email}
-            onChange={handleInputChange}
-            {...(errors.email && { error: true, helperText: errors.email })}
-          />
-          <FormControl
-            variant='outlined'
-            className={classes.formControl}
-            {...(errors.bloodGroup && { error: true })}
-          >
-            <InputLabel ref={inputLabel}>Blood Group</InputLabel>
-            <Select
-              name='bloodGroup'
-              value={values.bloodGroup}
+    <div>
+      <form
+        autoComplete='off'
+        noValidate
+        className={classes.root}
+        onSubmit={handleSubmit}
+      >
+        <Grid container>
+          <Grid item xs={12}>
+            <TextField
+              name='fullName'
+              variant='outlined'
+              label='Full Name'
+              value={values.fullName}
               onChange={handleInputChange}
-              labelWidth={labelWidth}
+              {...(errors.fullName && {
+                error: true,
+                helperText: errors.fullName,
+              })}
+            />
+
+            <TextField
+              name='email'
+              variant='outlined'
+              label='Email'
+              value={values.email}
+              onChange={handleInputChange}
+              {...(errors.email && { error: true, helperText: errors.email })}
+            />
+
+            <FormControl
+              variant='outlined'
+              className={classes.formControl}
+              {...(errors.bloodGroup && { error: true })}
             >
-              <MenuItem value=''>Select Blood Group</MenuItem>
-              <MenuItem value='A+'>A +ve</MenuItem>
-              <MenuItem value='A-'>A -ve</MenuItem>
-              <MenuItem value='B+'>B +ve</MenuItem>
-              <MenuItem value='B-'>B -ve</MenuItem>
-              <MenuItem value='AB+'>AB +ve</MenuItem>
-              <MenuItem value='AB-'>AB -ve</MenuItem>
-              <MenuItem value='O+'>O +ve</MenuItem>
-              <MenuItem value='O-'>O -ve</MenuItem>
-            </Select>
-            {errors.bloodGroup && (
-              <FormHelperText>{errors.bloodGroup}</FormHelperText>
-            )}
-          </FormControl>
+              <InputLabel ref={inputLabel}>Blood Group</InputLabel>
+              <Select
+                name='bloodGroup'
+                value={values.bloodGroup}
+                onChange={handleInputChange}
+                labelWidth={labelWidth}
+              >
+                <MenuItem value=''>Select Blood Group</MenuItem>
+                <MenuItem value='A+'>A+ </MenuItem>
+                <MenuItem value='A-'>A- </MenuItem>
+                <MenuItem value='B+'>B+ </MenuItem>
+                <MenuItem value='B-'>B- </MenuItem>
+                <MenuItem value='AB+'>AB+ </MenuItem>
+                <MenuItem value='AB-'>AB- </MenuItem>
+                <MenuItem value='O+'>O+ </MenuItem>
+                <MenuItem value='O-'>O- </MenuItem>
+              </Select>
+              {errors.bloodGroup && (
+                <FormHelperText>{errors.bloodGroup}</FormHelperText>
+              )}
+            </FormControl>
+            <TextField
+              name='mobile'
+              variant='outlined'
+              label='Mobile'
+              value={values.mobile}
+              onChange={handleInputChange}
+              {...(errors.mobile && { error: true, helperText: errors.mobile })}
+            />
+            <TextField
+              name='age'
+              variant='outlined'
+              label='Age'
+              value={values.age}
+              onChange={handleInputChange}
+            />
+            <TextField
+              name='address'
+              variant='outlined'
+              label='Address'
+              value={values.address}
+              onChange={handleInputChange}
+            />
+            <div>
+              <Button
+                variant='contained'
+                color='primary'
+                type='submit'
+                className={classes.smMargin}
+              >
+                Submit
+              </Button>
+              <Button
+                variant='contained'
+                className={classes.smMargin}
+                onClick={resetForm}
+              >
+                Reset
+              </Button>
+            </div>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <TextField
-            name='mobile'
-            variant='outlined'
-            label='Mobile'
-            value={values.mobile}
-            onChange={handleInputChange}
-            {...(errors.mobile && { error: true, helperText: errors.mobile })}
-          />
-          <TextField
-            name='age'
-            variant='outlined'
-            label='Age'
-            value={values.age}
-            onChange={handleInputChange}
-          />
-          <TextField
-            name='address'
-            variant='outlined'
-            label='Address'
-            value={values.address}
-            onChange={handleInputChange}
-          />
-          <div>
-            <Button
-              variant='contained'
-              color='primary'
-              type='submit'
-              className={classes.smMargin}
-            >
-              Submit
-            </Button>
-            <Button
-              variant='contained'
-              className={classes.smMargin}
-              onClick={resetForm}
-            >
-              Reset
-            </Button>
-          </div>
-        </Grid>
-      </Grid>
-    </form>
+      </form>
+    </div>
   );
 };
 

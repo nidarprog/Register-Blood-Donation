@@ -29,6 +29,8 @@ const styles = (theme) => ({
   paper: {
     margin: theme.spacing(2),
     padding: theme.spacing(2),
+    width: theme.spacing(65),
+    backgroundColor: "#FFF9F9",
   },
 });
 
@@ -37,9 +39,8 @@ const DCandidates = ({ classes, ...props }) => {
 
   useEffect(() => {
     props.fetchAllDCandidates();
-  }, []); //componentDidMount
+  }, []);
 
-  //toast msg.
   const { addToast } = useToasts();
 
   const onDelete = (id) => {
@@ -60,9 +61,16 @@ const DCandidates = ({ classes, ...props }) => {
         <Grid item xs={6}>
           <DCandidateForm {...{ currentId, setCurrentId }} />
         </Grid>
-        <Grid item xs={12}>
+        <Grid
+          item
+          xs={12}
+          container
+          direction='row'
+          justify='flex-start'
+          alignItems='flex-start'
+        >
           <TableContainer>
-            <Table>
+            <Grid>
               <TableHead className={classes.root}>
                 <TableRow>
                   <TableCell>Name</TableCell>
@@ -109,7 +117,7 @@ const DCandidates = ({ classes, ...props }) => {
                   );
                 })}
               </TableBody>
-            </Table>
+            </Grid>
           </TableContainer>
         </Grid>
       </Grid>
