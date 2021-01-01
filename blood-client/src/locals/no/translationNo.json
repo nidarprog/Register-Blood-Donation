@@ -8,6 +8,6 @@
     "address":"Adresse",    
     "add": "Legg til",   
     "name": "Navn", 
-    "title":"Registrering av blod donasjoner"
-
+    "title":"Registrering av blod donasjoner",
+    "reset":"Reset"
 }

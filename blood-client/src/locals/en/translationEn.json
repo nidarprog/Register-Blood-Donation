@@ -8,6 +8,7 @@
     "address":"Address",    
     "add": "Add",  
     "name": "Name",
-    "title":"Blood donation register"
+    "title":"Blood donation register",
+    "reset":"Reset"
 }
 

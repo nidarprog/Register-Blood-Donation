@@ -83,6 +83,13 @@ const DCandidates = ({ classes, ...props }) => {
           >
             EN
           </Button>
+          <Button
+            onClick={changeLanguage("ku")}
+            variant='outlined'
+            color='inherit'
+          >
+            KU
+          </Button>
 
           {/* <Typography variant='h6' className={classes.title}> */}
           {/* <div> {t("title")}</div> */}
@@ -123,6 +130,7 @@ const DCandidates = ({ classes, ...props }) => {
                     <TableRow key={index} hover>
                       <TableCell>{record.fullName}</TableCell>
                       <TableCell>{record.mobile}</TableCell>
+
                       <TableCell
                         style={{
                           fontWeight: "bold",
@@ -133,6 +141,7 @@ const DCandidates = ({ classes, ...props }) => {
                       >
                         {record.bloodGroup}
                       </TableCell>
+                      <TableCell>{record.email}</TableCell>
                       <TableCell>
                         <ButtonGroup variant='text'>
                           <Button>

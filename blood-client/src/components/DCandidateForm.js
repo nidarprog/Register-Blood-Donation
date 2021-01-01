@@ -203,7 +203,7 @@ const DCandidateForm = ({ classes, ...props }) => {
                 className={classes.smMargin}
                 onClick={resetForm}
               >
-                Reset
+                {t("reset")}
               </Button>
             </div>
           </Grid>
